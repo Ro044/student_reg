@@ -1,0 +1,143 @@
+<!--
+    ============================================================
+    Student Registration System
+    File:    index.html
+    Purpose: Page structure (Tasks 1–4) for the registration UI.
+    Author:  Student Registration Project
+    ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============== TASK 1: BASIC STRUCTURE ============== -->
+    <!-- Character encoding & browser compatibility -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Responsive viewport meta tag (required for Task 5) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- SEO meta tags -->
+    <meta name="description" content="Student Registration System - Register, edit, and delete student records with persistent local storage.">
+    <meta name="keywords" content="student, registration, system, HTML, CSS, JavaScript, CRUD, localStorage">
+    <meta name="author" content="Student Registration Project">
+
+    <title>StudentHub | Registration System</title>
+
+    <!-- External CSS file (Task 5) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ============== TASK 2: HEADER SECTION ==============
+         Catchy title + brief description of the system.       -->
+    <header class="hero">
+        <h1>Student Registration System</h1>
+        <p class="tagline">
+            Effortlessly manage student records — register new students, view all registered entries,
+            edit existing details, and delete records with persistent browser storage.
+        </p>
+    </header>
+
+    <!-- ============== DASHBOARD WRAPPER ===================
+         Two-column flex layout: form (left) + records (right).
+         Stacks vertically on tablet & mobile (see style.css). -->
+    <div class="dashboard">
+
+        <!-- ====== TASK 3: REGISTRATION FORM (Left card) ======
+             Each input has:
+               - <label> linked via 'for' (accessibility)
+               - placeholder text for guidance
+               - error <span> shown by JavaScript on invalid input
+        -->
+        <section class="form-card">
+            <h2>Register New Student</h2>
+
+            <!-- 'novalidate' disables native browser validation
+                 because Task 6 requires custom JS validation.   -->
+            <form id="studentForm" novalidate>
+
+                <!-- Field 1: Student Name (letters + spaces only) -->
+                <div class="input-group">
+                    <label for="studentName">Student Name *</label>
+                    <input type="text" id="studentName" name="studentName"
+                           placeholder="e.g., John Doe" autocomplete="off" required>
+                    <span class="error-msg" id="nameError">Only letters and spaces are allowed.</span>
+                </div>
+
+                <!-- Field 2: Student ID (numeric only, must be unique) -->
+                <div class="input-group">
+                    <label for="studentId">Student ID *</label>
+                    <input type="text" id="studentId" name="studentId"
+                           placeholder="e.g., 2024001" required>
+                    <span class="error-msg" id="idError">Student ID must contain numbers only.</span>
+                </div>
+
+                <!-- Field 3: Email ID (valid email format) -->
+                <div class="input-group">
+                    <label for="emailId">Email ID *</label>
+                    <input type="email" id="emailId" name="emailId"
+                           placeholder="student@example.com" required>
+                    <span class="error-msg" id="emailError">Please enter a valid email address.</span>
+                </div>
+
+                <!-- Field 4: Contact Number (digits only, min 10 digits) -->
+                <div class="input-group">
+                    <label for="contactNo">Contact Number *</label>
+                    <input type="tel" id="contactNo" name="contactNo"
+                           placeholder="9876543210 (min 10 digits)" required>
+                    <span class="error-msg" id="contactError">Contact must be numeric and at least 10 digits.</span>
+                </div>
+
+                <!-- Action buttons:
+                     - Add Student / Update Student (toggled by JS in edit mode)
+                     - Cancel Edit (hidden by default, shown only during edit)
+                     - Reset (clears the form)                     -->
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary" id="addBtn">Add Student</button>
+                    <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;">Cancel Edit</button>
+                    <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ====== TASK 4: DISPLAY SECTION (Right card) ======
+             Shows registered students in a responsive scrollable table.
+             - records-count : live count badge updated by JS
+             - table-wrapper : JS toggles a vertical scrollbar on overflow
+             - empty-row     : shown when no records exist
+        -->
+        <section class="records-card">
+            <div class="records-header">
+                <h2>Registered Students</h2>
+                <span class="records-count" id="studentCount">0 records</span>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="student-table" id="studentTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Student ID</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Initial empty-state row; replaced by JS once data loads -->
+                        <tr class="empty-row">
+                            <td colspan="5">No students registered yet. Add your first student!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ============== TASK 6: JAVASCRIPT ==============
+         'defer' ensures the DOM is fully parsed before script runs. -->
+    <script src="script.js" defer></script>
+</body>
+</html>
