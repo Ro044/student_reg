@@ -1,0 +1,530 @@
+/* ============================================================
+   Student Registration System - Stylesheet (Task 5)
+   Enhanced visual styling + Full responsiveness
+   Breakpoints: Mobile ≤ 640px | Tablet 641–1024px | Desktop ≥ 1025px
+   ============================================================ */
+
+/* ---------- CSS Variables (Theme Tokens) ---------- */
+:root {
+    --primary: #2c7da0;
+    --primary-dark: #1f5e7e;
+    --primary-light: #e8f3f9;
+    --accent: #1f4870;
+    --text-dark: #1e3a5f;
+    --text-body: #2c3e50;
+    --text-muted: #6c757d;
+    --bg-gradient: linear-gradient(145deg, #e9f0fc 0%, #d9e4f5 100%);
+    --card-bg: #ffffff;
+    --border-soft: #cbd5e1;
+    --border-card: rgba(44, 125, 160, 0.2);
+    --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.12);
+    --shadow-btn: 0 5px 12px rgba(44, 125, 160, 0.3);
+    --danger: #d9534f;
+    --warning: #f0ad4e;
+    --success: #28a745;
+    --radius-lg: 1.5rem;
+    --radius-md: 1rem;
+    --radius-sm: 0.6rem;
+    --transition: 0.25s ease;
+}
+
+/* ---------- Global Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+    color: var(--text-body);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   TASK 2: HEADER STYLES
+   ============================================================ */
+.hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--primary);
+    animation: fadeInDown 0.6s ease;
+}
+
+.hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero .tagline {
+    color: var(--text-body);
+    margin-top: 0.6rem;
+    font-weight: 500;
+    font-size: 1.05rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   DASHBOARD LAYOUT (Form + Records)
+   ============================================================ */
+.dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* Shared card visuals */
+.form-card,
+.records-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-card);
+    transition: transform var(--transition), box-shadow var(--transition);
+    animation: fadeInUp 0.6s ease;
+}
+
+.form-card:hover,
+.records-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   TASK 3: REGISTRATION FORM STYLES
+   ============================================================ */
+.form-card {
+    flex: 1.2;
+    min-width: 280px;
+    padding: 2rem;
+}
+
+.form-card h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--primary);
+    padding-left: 1rem;
+    font-weight: 700;
+}
+
+.input-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    outline: none;
+    background: #fefefe;
+    color: var(--text-body);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-group input::placeholder {
+    color: #94a3b8;
+    font-size: 0.88rem;
+}
+
+.input-group input:hover {
+    border-color: #94b8c9;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.2);
+    background: #ffffff;
+}
+
+.input-group input.invalid {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.15);
+}
+
+/* Inline error message under each input */
+.error-msg {
+    font-size: 0.75rem;
+    color: var(--danger);
+    margin-top: 0.3rem;
+    display: none;
+    font-weight: 500;
+}
+
+.error-msg.show {
+    display: block;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    letter-spacing: 0.3px;
+}
+
+.btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(44, 125, 160, 0.4);
+}
+
+.btn-secondary {
+    background: var(--text-muted);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #495057;
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   TASK 4: DISPLAY SECTION (Records Table) STYLES
+   ============================================================ */
+.records-card {
+    flex: 2;
+    min-width: 320px;
+    padding: 1.8rem;
+}
+
+.records-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 2px dashed var(--border-soft);
+    padding-bottom: 0.9rem;
+}
+
+.records-header h2 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    border-left: 5px solid var(--primary);
+    padding-left: 1rem;
+    font-weight: 700;
+}
+
+.records-count {
+    background: var(--primary-light);
+    color: var(--accent);
+    padding: 0.35rem 0.95rem;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: 1px solid rgba(44, 125, 160, 0.15);
+}
+
+/* Scrollable wrapper — max-height + overflow-y are toggled by JS dynamically */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid #eef2f6;
+    background: #fcfdff;
+    transition: max-height var(--transition);
+}
+
+.table-wrapper.scrollable {
+    overflow-y: auto;
+}
+
+.table-wrapper::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 8px;
+}
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #94b8c9;
+    border-radius: 8px;
+}
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 540px;
+}
+
+.student-table th {
+    background: #1f3b4c;
+    color: white;
+    padding: 14px 12px;
+    position: sticky;
+    top: 0;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+
+.student-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-word;
+    color: var(--text-body);
+}
+
+.student-table tbody tr {
+    transition: background var(--transition);
+}
+
+.student-table tbody tr:nth-child(even) {
+    background: #f8fbfd;
+}
+
+.student-table tbody tr:hover {
+    background: var(--primary-light);
+}
+
+.empty-row td {
+    color: var(--text-muted);
+    padding: 2.5rem 1rem;
+    font-style: italic;
+    background: #fcfdff !important;
+}
+
+/* Action buttons inside table rows */
+.action-btns {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+}
+
+.edit-btn {
+    background: #ffe0b5;
+    color: #c47a00;
+}
+
+.edit-btn:hover {
+    background: #ffce8e;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background: #ffe0e0;
+    color: #b33;
+}
+
+.delete-btn:hover {
+    background: #ffb3b3;
+    transform: translateY(-1px);
+}
+
+/* ============================================================
+   TASK 5: RESPONSIVE BREAKPOINTS
+   Mobile ≤ 640px | Tablet 641–1024px | Desktop ≥ 1025px
+   ============================================================ */
+
+/* ---------- DESKTOP (≥ 1025px) ---------- */
+@media (min-width: 1025px) {
+    .dashboard {
+        flex-direction: row;
+    }
+
+    .form-card {
+        position: sticky;
+        top: 1.5rem;
+    }
+}
+
+/* ---------- TABLET (641px – 1024px) ---------- */
+@media (min-width: 641px) and (max-width: 1024px) {
+    body {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .dashboard {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-card,
+    .records-card {
+        flex: auto;
+        width: 100%;
+    }
+
+    .form-card {
+        padding: 1.6rem;
+    }
+
+    .records-card {
+        padding: 1.4rem;
+    }
+
+    .table-wrapper {
+        max-height: 380px;
+    }
+}
+
+/* ---------- MOBILE (≤ 640px) ---------- */
+@media (max-width: 640px) {
+    body {
+        padding: 1rem 0.8rem;
+    }
+
+    .hero {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero .tagline {
+        font-size: 0.85rem;
+    }
+
+    .dashboard {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .form-card,
+    .records-card {
+        flex: auto;
+        width: 100%;
+        padding: 1.2rem;
+        border-radius: var(--radius-md);
+    }
+
+    .form-card h2,
+    .records-header h2 {
+        font-size: 1.2rem;
+        padding-left: 0.7rem;
+    }
+
+    .input-group input {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+    }
+
+    .button-group {
+        gap: 0.6rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        flex: 1;
+        min-width: 110px;
+    }
+
+    .records-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+
+    .student-table th,
+    .student-table td {
+        padding: 8px 6px;
+        font-size: 0.72rem;
+    }
+
+    .action-btns {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+    }
+
+    /* Disable hover lift on touch devices */
+    .form-card:hover,
+    .records-card:hover {
+        transform: none;
+    }
+}
